@@ -29,16 +29,36 @@ function setup() {
   ground = new Ground(width/2,height,width,20);
   
   particle1 = new Particle(300,50,20);
-  particle2 = new Particle(340,50,20);
 
   shooter = new Shooter(400,200,45);
   sling = new Sling(shooter.body,{x:400,y:200});
   
 
-      for (var k = 0; k <=width; k = k + 80) {
-      divisions.push(new Divisions(k, height-divisionHeight/2, 10, divisionHeight));
-    }
+
+   for (var k = 0; k <=width; k = k + 80) {
+     divisions.push(new Divisions(k, height-divisionHeight/2, 10, divisionHeight));
+   }
+
+
+
+
+   for (var j = 50; j <=width-10; j=j+120) 
+   {
    
+      plinkos.push(new Plinko(j,275));
+   }
+
+     for (var j = 75; j <=width; j=j+120) 
+    {
+    
+       plinkos.push(new Plinko(j,375));
+    }
+
+     for (var j = 50; j <=width-10; j=j+120) 
+    {
+    
+       plinkos.push(new Plinko(j,475));
+    }
 
     
 
@@ -68,7 +88,6 @@ function draw() {
   text("200", 732,634);
 
   particle1.display();
-  particle2.display();
 
   shooter.display();
 
@@ -91,6 +110,13 @@ function draw() {
    
    ground.display();
 
+   if(particle1.body.speed>1){
+    for (var i = 0; i < plinkos.length; i++) {
+     
+      plinkos[i].display();
+      
+    }
+   }
 
 
 
@@ -104,5 +130,4 @@ function mouseDragged(){
 
 function mouseReleased(){
     sling.fly();
-    gameState = "ready";
 }
